@@ -1,0 +1,7 @@
+apiVersion: wavesoftware.pl/v1alpha1
+kind: PassLess
+metadata:
+  name: example-passless
+spec:
+  # Add fields here
+  size: 3

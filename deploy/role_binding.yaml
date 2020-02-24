@@ -1,0 +1,11 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: passless-operator
+subjects:
+- kind: ServiceAccount
+  name: passless-operator
+roleRef:
+  kind: Role
+  name: passless-operator
+  apiGroup: rbac.authorization.k8s.io
