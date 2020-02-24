@@ -2,6 +2,7 @@ PROJECT_DIR   = $(shell readlink -f .)
 BUILD_DIR     = "$(PROJECT_DIR)/build/_output"
 MANAGER_DIR   = "$(PROJECT_DIR)/cmd/manager"
 MANAGER_BIN   = "$(BUILD_DIR)/bin/passless-operator"
+VERSION       = $(shell git describe)
 
 GO           ?= go
 RICHGO       ?= rich$(GO)
@@ -33,12 +34,17 @@ check: builddeps
 .PHONY: test
 test: builddir check
 	@echo " ✔️ Testing"
-	$(RICHGO) test -v -covermode=count -coverprofile=$(BUILD_DIR)/coverage.out ./...
+	$(RICHGO) test -v \
+		-covermode=count -coverprofile=$(BUILD_DIR)/coverage.out \
+		-ldflags="-X github.com/wavesoftware/passless-operator/version.Version=$(VERSION)" \
+		./...
 
 .PHONY: manager
 manager: builddir test
 	@echo " 🔨 Building manager"
-	$(RICHGO) build -o $(MANAGER_BIN) $(MANAGER_DIR)
+	$(RICHGO) build \
+		-ldflags="-X github.com/wavesoftware/passless-operator/version.Version=$(VERSION)" \
+		-o $(MANAGER_BIN) $(MANAGER_DIR)
 
 .PHONY: binaries
 binaries: manager
