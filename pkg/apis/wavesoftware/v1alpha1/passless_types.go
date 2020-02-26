@@ -1,9 +1,8 @@
 package v1alpha1
 
 import (
+	scopeapi "github.com/wavesoftware/passless-operator/pkg/masterpassword/scope"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-
-	"github.com/wavesoftware/passless-operator/pkg/masterpassword"
 )
 
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
@@ -13,6 +12,7 @@ import (
 // PassLessSpec defines the desired state of PassLess
 type PassLessSpec map[string]PassLessEntry
 
+// PassLessEntry contains a configuration for each secret value to be generated
 type PassLessEntry struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "operator-sdk generate k8s" to regenerate code after modifying this file
@@ -23,7 +23,7 @@ type PassLessEntry struct {
 	Num uint `json:"num,omitempty"`
 
 	// Scope defines a type of the passless secret.
-	Scope masterpassword.ScopeType `json:"scope,omitempty"`
+	Scope scopeapi.Type `json:"scope,omitempty"`
 
 	// Length defines a length of the passless secret.
 	Length uint8 `json:"length,omitempty"`
@@ -33,8 +33,13 @@ type PassLessEntry struct {
 type PassLessStatus string
 
 const (
+	// Dirty is when secret isn't in par with passless yet
 	Dirty   PassLessStatus = "Dirty"
+
+	// Ready is when secret has been reconciled
 	Ready   PassLessStatus = "Ready"
+
+	// Blocked is when whe can't create secret as there is another user created secret in the way
 	Blocked PassLessStatus = "Blocked"
 )
 

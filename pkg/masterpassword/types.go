@@ -1,17 +1,17 @@
 package masterpassword
 
-type ScopeType string
+import scopeapi "github.com/wavesoftware/passless-operator/pkg/masterpassword/scope"
 
-const (
-	Numeric       ScopeType = "num"
-	Alphabet      ScopeType = "alpha"
-	AlphaNumeric  ScopeType = "alnum"
-	EasyForHuman  ScopeType = "human"
-	KeyboardSigns ScopeType = "keys"
-	Utf8          ScopeType = "utf8"
-	Listing       ScopeType = "list"
-)
+// Generator can generate a secret based on given arguments
+type Generator interface {
 
-type PassLessGenerator interface {
-	Generate(identity, name string, scope ScopeType, counter uint, length uint8) []byte
+	// Generate will create new password in predictable way
+	Generate(name string, scope scopeapi.Type, counter uint, length uint8) string
+}
+
+// MasterKeyResolver resolves a master key to be used by generator
+type MasterKeyResolver interface {
+
+	// MasterKey returns a master bytes
+	MasterKey() []byte
 }

@@ -4,6 +4,6 @@ metadata:
   name: example-passless
 spec:
   db-password:
-    num: 1
+    num: 3
     scope: alnum
     length: 16
