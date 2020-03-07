@@ -3,9 +3,9 @@ RUN GO111MODULE=off go get github.com/kyoh86/richgo
 RUN GO111MODULE=off go get github.com/mgechev/revive
 RUN GO111MODULE=off go get honnef.co/go/tools/cmd/staticcheck
 
-COPY dist /work
+COPY ./ /work
 WORKDIR /work
-RUN make binaries
+RUN make
 
 FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
 
