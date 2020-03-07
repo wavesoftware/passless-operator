@@ -3,5 +3,7 @@ kind: PassLess
 metadata:
   name: example-passless
 spec:
-  # Add fields here
-  size: 3
+  db-password:
+    num: 1
+    scope: alnum
+    length: 16

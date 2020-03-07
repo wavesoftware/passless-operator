@@ -2,24 +2,41 @@ package v1alpha1
 
 import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+
+	"github.com/wavesoftware/passless-operator/pkg/masterpassword"
 )
 
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
+// +genclient
 
 // PassLessSpec defines the desired state of PassLess
-type PassLessSpec struct {
+type PassLessSpec map[string]PassLessEntry
+
+type PassLessEntry struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "operator-sdk generate k8s" to regenerate code after modifying this file
 	// Add custom validation using kubebuilder tags: https://book-v1.book.kubebuilder.io/beyond_basics/generating_crd.html
+
+	// Num defines a incremental number of a passless secret. To change secret
+	// increment this number.
+	Num uint `json:"num,omitempty"`
+
+	// Scope defines a type of the passless secret.
+	Scope masterpassword.ScopeType `json:"scope,omitempty"`
+
+	// Length defines a length of the passless secret.
+	Length uint8 `json:"length,omitempty"`
 }
 
 // PassLessStatus defines the observed state of PassLess
-type PassLessStatus struct {
-	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
-	// Important: Run "operator-sdk generate k8s" to regenerate code after modifying this file
-	// Add custom validation using kubebuilder tags: https://book-v1.book.kubebuilder.io/beyond_basics/generating_crd.html
-}
+type PassLessStatus string
+
+const (
+	Dirty   PassLessStatus = "Dirty"
+	Ready   PassLessStatus = "Ready"
+	Blocked PassLessStatus = "Blocked"
+)
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 

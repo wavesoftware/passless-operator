@@ -29,11 +29,24 @@ spec:
         metadata:
           type: object
         spec:
+          additionalProperties:
+            properties:
+              length:
+                description: Length defines a length of the passless secret.
+                type: integer
+              num:
+                description: Num defines a incremental number of a passless secret.
+                  To change secret increment this number.
+                type: integer
+              scope:
+                description: Scope defines a type of the passless secret.
+                type: string
+            type: object
           description: PassLessSpec defines the desired state of PassLess
           type: object
         status:
           description: PassLessStatus defines the observed state of PassLess
-          type: object
+          type: string
       type: object
   version: v1alpha1
   versions:
