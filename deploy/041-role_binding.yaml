@@ -1,11 +1,12 @@
-kind: RoleBinding
+kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: passless-operator
 subjects:
 - kind: ServiceAccount
   name: passless-operator
+  namespace: kube-system
 roleRef:
-  kind: Role
+  kind: ClusterRole
   name: passless-operator
   apiGroup: rbac.authorization.k8s.io
