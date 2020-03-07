@@ -1,2 +1,2 @@
-build/_output/**
 build/Dockerfile
+Dockerfile

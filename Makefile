@@ -2,13 +2,13 @@ PROJECT_DIR   = $(shell readlink -f .)
 BUILD_DIR     = "$(PROJECT_DIR)/build/_output"
 MANAGER_DIR   = "$(PROJECT_DIR)/cmd/manager"
 MANAGER_BIN   = "$(BUILD_DIR)/bin/passless-operator"
-VERSION       = $(shell git describe)
+VERSION       = $(shell git describe --always --dirty)
 
 GO           ?= go
 RICHGO       ?= rich$(GO)
 
 .PHONY: default
-default: binaries
+default: binary
 
 .PHONY: builddeps
 builddeps:
@@ -39,17 +39,17 @@ test: builddir check
 		-ldflags="-X github.com/wavesoftware/passless-operator/version.Version=$(VERSION)" \
 		./...
 
-.PHONY: manager
-manager: builddir test
-	@echo " 🔨 Building manager"
+.PHONY: binary
+binary: builddir test
+	@echo " 🔨 Building binary"
 	$(RICHGO) build \
 		-ldflags="-X github.com/wavesoftware/passless-operator/version.Version=$(VERSION)" \
 		-o $(MANAGER_BIN) $(MANAGER_DIR)
 
-.PHONY: binaries
-binaries: manager
-
-.PHONY: images
-images:
-	@echo " 🔨 Building images"
+.PHONy: image-sole
+image-sole:
+	@echo " 🔨 Building image"
 	operator-sdk build quay.io/wavesoftware/passless-operator
+
+.PHONY: image
+image: binary image-sole
