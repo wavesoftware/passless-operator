@@ -49,7 +49,9 @@ binary: builddir test
 .PHONy: image-sole
 image-sole:
 	@echo " 🔨 Building image"
-	operator-sdk build quay.io/wavesoftware/passless-operator
+	operator-sdk build \
+		--go-build-args "-ldflags -X=github.com/wavesoftware/passless-operator/version.Version=$(VERSION)" \
+		quay.io/wavesoftware/passless-operator
 
 .PHONY: image
-image: binary image-sole
+image: test image-sole
