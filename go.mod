@@ -1,6 +1,6 @@
 module github.com/wavesoftware/passless-operator
 
-go 1.13
+go 1.14
 
 require (
 	github.com/mitchellh/go-homedir v1.1.0

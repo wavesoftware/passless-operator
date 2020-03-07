@@ -1,4 +1,4 @@
-FROM docker.io/library/golang:1.13 as builder
+FROM docker.io/library/golang:1.14 as builder
 RUN GO111MODULE=off go get github.com/kyoh86/richgo
 RUN GO111MODULE=off go get github.com/mgechev/revive
 RUN GO111MODULE=off go get honnef.co/go/tools/cmd/staticcheck
