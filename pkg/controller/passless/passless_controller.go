@@ -6,6 +6,7 @@ import (
 
 	wavesoftwarev1alpha1 "github.com/wavesoftware/passless-operator/pkg/apis/wavesoftware/v1alpha1"
 	"github.com/wavesoftware/passless-operator/pkg/masterpassword"
+	"github.com/wavesoftware/passless-operator/pkg/masterpassword/secrets"
 
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
@@ -109,6 +110,7 @@ func (r *ReconcilePassLess) Reconcile(request reconcile.Request) (reconcile.Resu
 
 	// Define a new Secret object
 	secret := passless.CreateSecret(r.generator)
+	hashcode := secrets.Hashcode(secret)
 
 	// Set PassLess instance as the owner and controller
 	if err := controllerutil.SetControllerReference(passless, secret, r.scheme); err != nil {
@@ -122,9 +124,9 @@ func (r *ReconcilePassLess) Reconcile(request reconcile.Request) (reconcile.Resu
 		Namespace: secret.Namespace,
 	}, found)
 	if err != nil && errors.IsNotFound(err) {
-		reqLogger.Info("Creating a new Secret",
-			"Secret.Namespace", secret.Namespace,
-			"Secret.Name", secret.Name)
+		reqLogger.Info("Creating a new secret",
+			"Hash", hashcode,
+		)
 		err = r.client.Create(ctx, secret)
 		if err != nil {
 			return reconcile.Result{}, err
@@ -138,6 +140,9 @@ func (r *ReconcilePassLess) Reconcile(request reconcile.Request) (reconcile.Resu
 
 	// Secret already exists, check if need update
 	if needsUpdate(secret, found) {
+		reqLogger.Info("Updating a secret",
+			"Hash", hashcode,
+		)
 		err := r.client.Update(ctx, secret)
 		if err != nil {
 			return reconcile.Result{}, err

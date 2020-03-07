@@ -1,10 +1,8 @@
 package v1alpha1
 
 import (
-	"encoding/base64"
-
 	corev1 "k8s.io/api/core/v1"
-	"k8s.io/apimachinery/pkg/apis/meta/v1"
+	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	"github.com/wavesoftware/passless-operator/pkg/masterpassword"
 )
@@ -28,9 +26,10 @@ func (in *PassLess) CreateSecret(generator masterpassword.Generator) *corev1.Sec
 func (in *PassLess) createData(generator masterpassword.Generator) map[string][]byte {
 	data := make(map[string][]byte, len(in.Spec))
 	for name, entry := range in.Spec {
-		secret := generator.Generate(in.identity(name), entry.Scope, entry.Version, entry.Length)
-		dst := base64.StdEncoding.EncodeToString([]byte(secret))
-		data[name] = []byte(dst)
+		secret := generator.Generate(
+			in.identity(name), entry.Scope, entry.Version, entry.Length,
+		)
+		data[name] = []byte(secret)
 	}
 	return data
 }
