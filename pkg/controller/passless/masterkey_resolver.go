@@ -3,6 +3,8 @@ package passless
 import (
 	"context"
 	"errors"
+	"math/rand"
+	"sort"
 
 	"github.com/wavesoftware/go-ensure"
 	"github.com/wavesoftware/passless-operator/pkg/masterpassword"
@@ -22,10 +24,25 @@ func (r *resolver) MasterKey() []byte {
 	secret, err := findDefaultToken(list)
 	ensure.NoError(err)
 	result := make([]byte, 0)
-	for _, bytes := range secret.Data {
+	for _, k := range keys(secret.Data) {
+		bytes := secret.Data[k]
 		result = append(result, bytes...)
 	}
+	source := rand.NewSource(42)
+	rr := rand.New(source)
+	rr.Shuffle(len(result), func(i, j int) {
+		result[i], result[j] = result[j], result[i]
+	})
 	return result
+}
+
+func keys(m map[string][]byte) []string {
+	keys := make([]string, 0, len(m))
+	for k := range m {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	return keys
 }
 
 func findDefaultToken(list *corev1.SecretList) (corev1.Secret, error) {

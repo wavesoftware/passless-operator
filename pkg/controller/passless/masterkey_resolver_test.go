@@ -16,9 +16,11 @@ func TestResolverMasterKey(t *testing.T) {
 	resolver := newResolver(client)
 
 	// when
-	masterKey :=resolver.MasterKey()
+	masterKey := resolver.MasterKey()
+	masterKey2 := resolver.MasterKey()
 
 	// then
 	assert.NotEmpty(t, masterKey)
 	assert.Greater(t, len(masterKey), 10)
+	assert.Equal(t, masterKey, masterKey2)
 }
