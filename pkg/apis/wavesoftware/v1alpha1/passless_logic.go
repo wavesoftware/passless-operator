@@ -10,7 +10,7 @@ import (
 )
 
 // CreateSecret will created a secret that corresponds to
-func (in *PassLess) CreateSecret(generator masterpassword.PassLessGenerator) *corev1.Secret {
+func (in *PassLess) CreateSecret(generator masterpassword.Generator) *corev1.Secret {
 	data := in.createData(generator)
 	secret := &corev1.Secret{
 		ObjectMeta: v1.ObjectMeta{
@@ -25,19 +25,18 @@ func (in *PassLess) CreateSecret(generator masterpassword.PassLessGenerator) *co
 	return secret
 }
 
-func (in *PassLess) createData(generator masterpassword.PassLessGenerator) map[string][]byte {
+func (in *PassLess) createData(generator masterpassword.Generator) map[string][]byte {
 	data := make(map[string][]byte, len(in.Spec))
 	for name, entry := range in.Spec {
-		var dst []byte
-		secret := generator.Generate(in.identity(), name, entry.Scope, entry.Num, entry.Length)
-		base64.StdEncoding.Encode(dst, secret)
-		data[name] = dst
+		secret := generator.Generate(in.identity(name), entry.Scope, entry.Num, entry.Length)
+		dst := base64.StdEncoding.EncodeToString([]byte(secret))
+		data[name] = []byte(dst)
 	}
 	return data
 }
 
-func (in *PassLess) identity() string {
-	return in.Namespace
+func (in *PassLess) identity(name string) string {
+	return in.Namespace + "/" + name
 }
 
 func (in *PassLess) copyMap(m map[string]string) map[string]string {

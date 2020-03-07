@@ -36,10 +36,12 @@ func Add(mgr manager.Manager) error {
 
 // newReconciler returns a new reconcile.Reconciler
 func newReconciler(mgr manager.Manager) reconcile.Reconciler {
+	cl := mgr.GetClient()
+	resolver := newResolver(cl)
 	return &ReconcilePassLess{
-		client: mgr.GetClient(),
-		scheme: mgr.GetScheme(),
-		generator: masterpassword.NewGenerator(),
+		client:    cl,
+		scheme:    mgr.GetScheme(),
+		generator: masterpassword.NewGenerator(resolver),
 	}
 }
 
@@ -78,7 +80,7 @@ type ReconcilePassLess struct {
 	// that reads objects from the cache and writes to the apiserver
 	client    client.Client
 	scheme    *runtime.Scheme
-	generator *masterpassword.Generator
+	generator masterpassword.Generator
 }
 
 // Reconcile reads that state of the cluster for a PassLess object and makes changes based on the state read

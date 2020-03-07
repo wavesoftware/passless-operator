@@ -28,8 +28,8 @@ clean: builddeps
 .PHONY: check
 check: builddeps
 	@echo " 🛂 Checking"
-	staticcheck -f stylish ./...
 	revive -config revive.toml -formatter stylish ./...
+	staticcheck -f stylish ./...
 
 .PHONY: test
 test: builddir check
