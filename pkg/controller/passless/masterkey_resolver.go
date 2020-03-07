@@ -2,7 +2,6 @@ package passless
 
 import (
 	"context"
-	"encoding/base64"
 	"errors"
 
 	"github.com/wavesoftware/go-ensure"
@@ -22,16 +21,17 @@ func (r *resolver) MasterKey() []byte {
 	ensure.NoError(err)
 	secret, err := findDefaultToken(list)
 	ensure.NoError(err)
-	crt := secret.Data["ca.crt"]
-	var dst []byte
-	_, err = base64.StdEncoding.Decode(dst, crt)
-	ensure.NoError(err)
-	return dst
+	result := make([]byte, 0)
+	for _, bytes := range secret.Data {
+		result = append(result, bytes...)
+	}
+	return result
 }
 
 func findDefaultToken(list *corev1.SecretList) (corev1.Secret, error) {
 	for _, sec := range list.Items {
-		if sec.Annotations["kubernetes.io/service-account.name"] == "default" {
+		if sec.Type == "kubernetes.io/service-account-token" &&
+			sec.Annotations["kubernetes.io/service-account.name"] == "default" {
 			return sec, nil
 		}
 	}
