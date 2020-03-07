@@ -1,7 +1,6 @@
 package v1alpha1
 
 import (
-	scopeapi "github.com/wavesoftware/passless-operator/pkg/masterpassword/scope"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -18,12 +17,12 @@ type PassLessEntry struct {
 	// Important: Run "operator-sdk generate k8s" to regenerate code after modifying this file
 	// Add custom validation using kubebuilder tags: https://book-v1.book.kubebuilder.io/beyond_basics/generating_crd.html
 
-	// Num defines a incremental number of a passless secret. To change secret
+	// Version defines a incremental number of a passless secret. To change secret
 	// increment this number.
-	Num uint `json:"num,omitempty"`
+	Version uint `json:"version,omitempty"`
 
 	// Scope defines a type of the passless secret.
-	Scope scopeapi.Type `json:"scope,omitempty"`
+	Scope string `json:"scope,omitempty"`
 
 	// Length defines a length of the passless secret.
 	Length uint8 `json:"length,omitempty"`

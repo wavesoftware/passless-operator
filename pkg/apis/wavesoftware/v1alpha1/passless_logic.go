@@ -28,7 +28,7 @@ func (in *PassLess) CreateSecret(generator masterpassword.Generator) *corev1.Sec
 func (in *PassLess) createData(generator masterpassword.Generator) map[string][]byte {
 	data := make(map[string][]byte, len(in.Spec))
 	for name, entry := range in.Spec {
-		secret := generator.Generate(in.identity(name), entry.Scope, entry.Num, entry.Length)
+		secret := generator.Generate(in.identity(name), entry.Scope, entry.Version, entry.Length)
 		dst := base64.StdEncoding.EncodeToString([]byte(secret))
 		data[name] = []byte(dst)
 	}

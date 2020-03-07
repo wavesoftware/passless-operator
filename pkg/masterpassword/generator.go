@@ -3,6 +3,7 @@ package masterpassword
 import (
 	"crypto/hmac"
 	"crypto/sha256"
+	"strings"
 	"time"
 
 	"github.com/wavesoftware/go-ensure"
@@ -32,9 +33,7 @@ func NewGenerator(resolver MasterKeyResolver) Generator {
 	}
 }
 
-func (g *generator) Generate(
-	name string, scope scopeapi.Type, counter uint, length uint8,
-) string {
+func (g *generator) Generate(name, scope string, counter uint, length uint8) string {
 	siteKey := calculateSiteKey(name, g.ensureMasterKey(), counter)
 	return calculateSecret(siteKey, scope, length)
 }
@@ -46,16 +45,27 @@ func calculateSiteKey(siteName string, masterKey []byte, counter uint) []byte {
 	return h.Sum(nil)
 }
 
-func calculateSecret(siteKey []byte, scopeType scopeapi.Type, length uint8) string {
+func calculateSecret(siteKey []byte, scopeSpec string, length uint8) string {
 	secret := make([]rune, 0)
 	numbers := newNumberGenerator(siteKey)
-	scope := scopeapi.Scopes[scopeType]
+	scopeType, params := processScopeSpec(scopeSpec)
+	scopeProducer := scopeapi.Scopes[scopeType]
+	scope := scopeProducer.Produce(params)
 	for len(secret) < int(length) {
 		number := numbers.next()
 		r := scope.Provide(number)
 		secret = append(secret, r)
 	}
 	return string(secret)
+}
+
+func processScopeSpec(scopeSpec string) (scopeapi.Type, string) {
+	parts := strings.SplitN(scopeSpec, ":", 2)
+	t := scopeapi.Type(parts[0])
+	if len(parts) == 2 {
+		return t, parts[1]
+	}
+	return t, ""
 }
 
 func (g *generator) ensureMasterKey() []byte {

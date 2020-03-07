@@ -3,7 +3,7 @@ package scope
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz"
 
 func init() {
-	Scopes[Alphabet] = &arrayBased{
+	Scopes[Alphabet] = &parameterlessProducer{&arrayBased{
 		array: []rune(alphabet),
-	}
+	}}
 }

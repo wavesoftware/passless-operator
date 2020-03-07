@@ -28,7 +28,7 @@ func (u *utf8Scope) max() int {
 }
 
 func init() {
-	Scopes[Utf8] = &utf8Scope{
+	Scopes[Utf8] = &parameterlessProducer{&utf8Scope{
 		group: 1,
-	}
+	}}
 }

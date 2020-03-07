@@ -1,7 +1,7 @@
 package scope
 
 func init() {
-	Scopes[AlphaNumeric] = &arrayBased{
+	Scopes[AlphaNumeric] = &parameterlessProducer{&arrayBased{
 		array: []rune(alphabet + numbers),
-	}
+	}}
 }

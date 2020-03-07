@@ -23,9 +23,9 @@ func newNumberGenerator(key []byte) *numberGenerator {
 
 func (g *numberGenerator) next() int {
 	if len(g.bytes) >= 2 {
-		dbyte := []byte{g.bytes[0], g.bytes[1], 0, 0}
+		dbyte := []byte{g.bytes[0], g.bytes[1]}
 		g.bytes = g.bytes[2:]
-		data := binary.BigEndian.Uint32(dbyte)
+		data := binary.BigEndian.Uint16(dbyte)
 		return int(data)
 	}
 	return g.random.Int()

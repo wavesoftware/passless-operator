@@ -26,10 +26,17 @@ const (
 	Listing Type = "list"
 )
 
+// Producer creates a scope for given params
+type Producer interface {
+	// Produce a scope for given params
+	Produce(params string) Scope
+}
+
 // Scope is used to generate secret values
 type Scope interface {
+	// Provide a rune by number given
 	Provide(number int) rune
 }
 
 // Scopes holds all implementations of scope type
-var Scopes = make(map[Type]Scope)
+var Scopes = make(map[Type]Producer)

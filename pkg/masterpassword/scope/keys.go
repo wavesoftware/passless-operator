@@ -1,10 +1,10 @@
 package scope
 
-const special = "`~!@#$%^&*()_+=-[]{}:;'\",./<>?\\|"
+const special = "`~!@#$%^&*()_+=-[]{}:;'\",./<>?\\| "
 
 func init() {
-	Scopes[KeyboardSigns] = &arrayBased{
+	Scopes[KeyboardSigns] = &parameterlessProducer{&arrayBased{
 		array: []rune(alphabet + numbers + special),
-	}
+	}}
 }
 
