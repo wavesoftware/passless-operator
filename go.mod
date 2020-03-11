@@ -3,6 +3,9 @@ module github.com/wavesoftware/passless-operator
 go 1.14
 
 require (
+	github.com/fatih/color v1.7.0
+	github.com/hashicorp/go-multierror v1.0.0
+	github.com/magefile/mage v1.9.0
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/operator-framework/operator-sdk v0.15.2
 	github.com/spf13/pflag v1.0.5
