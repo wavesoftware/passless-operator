@@ -3,6 +3,7 @@ package masterpassword
 import (
 	"crypto/hmac"
 	"crypto/sha256"
+	"fmt"
 	"strings"
 	"time"
 
@@ -39,9 +40,11 @@ func (g *generator) Generate(name, scope string, counter uint, length uint8) str
 }
 
 func calculateSiteKey(siteName string, masterKey []byte, counter uint) []byte {
-	seed := authentication + string(len(siteName)) + siteName + string(counter)
+	seed := fmt.Sprintf("%s%c%s%c",
+		authentication, len(siteName), siteName, counter)
 	h := hmac.New(sha256.New, []byte(seed))
-	h.Write(masterKey)
+	_, err := h.Write(masterKey)
+	ensure.NoError(err)
 	return h.Sum(nil)
 }
 
@@ -83,7 +86,7 @@ func (g *generator) ensureMasterKey() []byte {
 
 func calculateMasterKey(secret []byte) []byte {
 	key := secret
-	salt := authentication + string(len(identity)) + identity
+	salt := authentication + string(rune(len(identity))) + identity
 	cost := 32_768
 	blocksize := 8
 	parallelization := 2
