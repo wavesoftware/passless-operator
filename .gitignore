@@ -24,8 +24,7 @@ testbin/*
 *.swo
 *~
 
-# Binaries
-bin/*
+build/
 
 # kustomize manager file
 config/manager/kustomization.yaml

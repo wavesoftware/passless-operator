@@ -1,6 +1,5 @@
 # Build the manager binary
 FROM golang:1.16 as builder
-ARG VERSION=development
 
 WORKDIR /workspace
 # Copy the Go Modules manifests
@@ -16,6 +15,7 @@ COPY api/ api/
 COPY controllers/ controllers/
 COPY pkg/ pkg/
 
+ARG VERSION=development
 # Build
 RUN CGO_ENABLED=0 \
     GOOS=linux \
