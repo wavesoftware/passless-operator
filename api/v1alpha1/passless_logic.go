@@ -1,13 +1,12 @@
 package v1alpha1
 
 import (
+	"github.com/wavesoftware/passless-operator/pkg/masterpassword"
 	corev1 "k8s.io/api/core/v1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-
-	"github.com/wavesoftware/passless-operator/pkg/masterpassword"
 )
 
-// CreateSecret will created a secret that corresponds to
+// CreateSecret will created a secret that corresponds to.
 func (in *PassLess) CreateSecret(generator masterpassword.Generator) *corev1.Secret {
 	data := in.createData(generator)
 	secret := &corev1.Secret{

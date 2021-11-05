@@ -6,7 +6,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client/apiutil"
 )
 
-// NewClient will create a new client from default configuration
+// NewClient will create a new client from default configuration.
 func NewClient() (client.Client, error) {
 	cfg, err := BuildDefaultClientConfig()
 	if err != nil {

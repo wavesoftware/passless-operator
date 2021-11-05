@@ -23,10 +23,10 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
-// PassLessSpec defines the desired state of PassLess
+// PassLessSpec defines the desired state of PassLess.
 type PassLessSpec map[string]PassLessEntry
 
-// PassLessEntry contains a configuration for each secret value to be generated
+// PassLessEntry contains a configuration for each secret value to be generated.
 type PassLessEntry struct {
 	// Version defines an incremental number of a passless secret. To change secret
 	// increment this number.
@@ -39,25 +39,25 @@ type PassLessEntry struct {
 	Length uint8 `json:"length,omitempty"`
 }
 
-// PassLessStatus defines the observed state of PassLess
+// PassLessStatus defines the observed state of PassLess.
 type PassLessStatus string
 
 const (
-	// Dirty is when secret isn't in par with passless yet
+	// Dirty is when secret isn't in par with passless yet.
 	Dirty PassLessStatus = "Dirty"
 
-	// Ready is when secret has been reconciled
+	// Ready is when secret has been reconciled.
 	Ready PassLessStatus = "Ready"
 
 	// Blocked is when whe can't create secret as there is another user
-	// created secret in the way
+	// created secret in the way.
 	Blocked PassLessStatus = "Blocked"
 )
 
 //+kubebuilder:object:root=true
 //+kubebuilder:subresource:status
 
-// PassLess is the Schema for the passlesses API
+// PassLess is the Schema for the passlesses API.
 type PassLess struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -68,7 +68,7 @@ type PassLess struct {
 
 //+kubebuilder:object:root=true
 
-// PassLessList contains a list of PassLess
+// PassLessList contains a list of PassLess.
 type PassLessList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`

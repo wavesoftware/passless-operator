@@ -6,7 +6,7 @@ import (
 	corev1 "k8s.io/api/core/v1"
 )
 
-// Keys returns a keys from secret in sorted slice
+// Keys returns a keys from secret in sorted slice.
 func Keys(sec *corev1.Secret) []string {
 	m := sec.Data
 	keys := make([]string, 0, len(m))

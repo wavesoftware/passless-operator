@@ -6,7 +6,7 @@ import (
 	corev1 "k8s.io/api/core/v1"
 )
 
-// Hashcode will calculate a secret's hash code
+// Hashcode will calculate a secret's hash code.
 func Hashcode(secret *corev1.Secret) int {
 	code := 31
 	keys := Keys(secret)

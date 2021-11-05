@@ -34,7 +34,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log"
 )
 
-// PassLessReconciler reconciles a PassLess object
+// PassLessReconciler reconciles a PassLess object.
 type PassLessReconciler struct {
 	client.Client
 	Scheme *runtime.Scheme

@@ -27,7 +27,7 @@ type masterKey struct {
 	updated time.Time
 }
 
-// NewGenerator will create new passless secret generator
+// NewGenerator will create new passless secret generator.
 func NewGenerator(resolver MasterKeyResolver) Generator {
 	return &generator{resolver: resolver}
 }
