@@ -1,6 +1,0 @@
-#!/bin/sh -e
-
-set -eu
-
-# shellcheck disable=SC2068
-exec "${OPERATOR:?operator env is required}" $@

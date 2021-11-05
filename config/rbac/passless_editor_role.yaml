@@ -1,0 +1,24 @@
+# permissions for end users to edit passlesses.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: passless-editor-role
+rules:
+- apiGroups:
+  - wavesoftware.pl
+  resources:
+  - passlesses
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - wavesoftware.pl
+  resources:
+  - passlesses/status
+  verbs:
+  - get

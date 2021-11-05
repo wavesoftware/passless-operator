@@ -7,4 +7,3 @@ func init() {
 		array: []rune(alphabet + numbers + special),
 	}}
 }
-

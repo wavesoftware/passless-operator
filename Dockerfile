@@ -1,25 +1,34 @@
-FROM docker.io/library/golang:1.14 as builder
-RUN GO111MODULE=off go get github.com/kyoh86/richgo
-RUN GO111MODULE=off go get github.com/mgechev/revive
-RUN GO111MODULE=off go get honnef.co/go/tools/cmd/staticcheck
+# Build the manager binary
+FROM golang:1.16 as builder
+ARG VERSION=development
 
-COPY ./ /work
-WORKDIR /work
-RUN make
+WORKDIR /workspace
+# Copy the Go Modules manifests
+COPY go.mod go.mod
+COPY go.sum go.sum
+# cache deps before building and copying source so that we don't need to re-download as much
+# and so that source changes don't invalidate our downloaded layer
+RUN go mod download
 
-FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
+# Copy the go source
+COPY main.go main.go
+COPY api/ api/
+COPY controllers/ controllers/
+COPY pkg/ pkg/
 
-ENV OPERATOR=/usr/local/bin/passless-operator \
-    USER_UID=1001 \
-    USER_NAME=passless-operator \
-    HOME=/home/passless-operator
+# Build
+RUN CGO_ENABLED=0 \
+    GOOS=linux \
+    GOARCH=amd64 \
+    go build -a \
+    -ldflags="-X github.com/wavesoftware/passless-operator/pkg/metadata.Version=${VERSION}" \
+    -o manager main.go
 
-# install operator binary
-COPY --from=builder /work/build/_output/bin/passless-operator ${OPERATOR}
+# Use distroless as minimal base image to package the manager binary
+# Refer to https://github.com/GoogleContainerTools/distroless for more details
+FROM gcr.io/distroless/static:nonroot
+WORKDIR /
+COPY --from=builder /workspace/manager .
+USER 65532:65532
 
-COPY build/bin /usr/local/bin
-RUN  /usr/local/bin/user_setup
-
-ENTRYPOINT ["/usr/local/bin/entrypoint"]
-
-USER ${USER_UID}
+ENTRYPOINT ["/manager"]

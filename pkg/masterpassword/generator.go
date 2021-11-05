@@ -29,9 +29,7 @@ type masterKey struct {
 
 // NewGenerator will create new passless secret generator
 func NewGenerator(resolver MasterKeyResolver) Generator {
-	return &generator{
-		resolver: resolver,
-	}
+	return &generator{resolver: resolver}
 }
 
 func (g *generator) Generate(name, scope string, counter uint, length uint8) string {
