@@ -19,7 +19,7 @@ spec:
   - name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: PassLess is the Schema for the passlesses API
+        description: PassLess is the Schema for the passlesses API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -36,7 +36,7 @@ spec:
           spec:
             additionalProperties:
               description: PassLessEntry contains a configuration for each secret
-                value to be generated
+                value to be generated.
               properties:
                 length:
                   description: Length defines a length of the passless secret.
@@ -49,10 +49,10 @@ spec:
                     secret. To change secret increment this number.
                   type: integer
               type: object
-            description: PassLessSpec defines the desired state of PassLess
+            description: PassLessSpec defines the desired state of PassLess.
             type: object
           status:
-            description: PassLessStatus defines the observed state of PassLess
+            description: PassLessStatus defines the observed state of PassLess.
             type: string
         type: object
     served: true
