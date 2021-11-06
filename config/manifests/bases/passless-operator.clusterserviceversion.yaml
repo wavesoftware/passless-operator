@@ -1,0 +1,55 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  annotations:
+    alm-examples: '[]'
+    capabilities: Basic Install
+  name: passless-operator.v0.0.0
+  namespace: placeholder
+spec:
+  apiservicedefinitions: {}
+  customresourcedefinitions:
+    owned:
+    - description: PassLess is the Schema for the passlesses API.
+      displayName: Pass Less
+      kind: PassLess
+      name: passlesses.wavesoftware.pl
+      version: v1alpha1
+  description: Passless implements a concept of secret management without credentials
+    storage utilizing master password algorithm.
+  displayName: Passless Operator
+  icon:
+  - base64data: ""
+    mediatype: ""
+  install:
+    spec:
+      deployments: null
+    strategy: ""
+  installModes:
+  - supported: false
+    type: OwnNamespace
+  - supported: false
+    type: SingleNamespace
+  - supported: false
+    type: MultiNamespace
+  - supported: true
+    type: AllNamespaces
+  keywords:
+  - kubernetes
+  - password-generator
+  - password-manager
+  - secret-management
+  - operator
+  - passwordless
+  - master-password
+  links:
+  - name: Passless Operator
+    url: https://github.com/wavesoftware/passless-operator
+  maintainers:
+  - email: info@wavesoftware.pl
+    name: Chris Suszynski
+  maturity: alpha
+  provider:
+    name: Wave Software
+    url: https://github.com/wavesoftware
+  version: 0.0.0

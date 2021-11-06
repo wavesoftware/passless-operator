@@ -25,6 +25,7 @@ testbin/*
 *~
 
 build/
+bundle/
 
 # kustomize manager file
 config/manager/kustomization.yaml
