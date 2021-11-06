@@ -1,6 +1,6 @@
 # PassLess Operator for Kubernetes
 
-[![Build Status](https://travis-ci.com/wavesoftware/passless-operator.svg?branch=master)](https://travis-ci.com/wavesoftware/passless-operator)
+[![Build](https://github.com/wavesoftware/passless-operator/actions/workflows/go.yml/badge.svg)](https://github.com/wavesoftware/passless-operator/actions/workflows/go.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/wavesoftware/passless-operator)](https://goreportcard.com/report/github.com/wavesoftware/passless-operator)
 
 PassLess Operator implements a concept of secret management without the need of
@@ -88,17 +88,32 @@ change if `default-token` secret form `kube-system` namespace is changed.
 For now, this behavior isn't configurable, but it's good idea for future 
 features.
 
-## Contributing
+## Building
 
-Contributions are welcome!
+If you'd like to build the operator yourself, you will need to have
+[Golang](https://golang.org/) installed on your machine. Check the `go.mod`
+file for current minimum version.
 
-To contribute, follow the standard [git flow](http://danielkummer.github.io/git-flow-cheatsheet) of:
+To build the operator, invoke the following command:
 
-1. Fork it
-1. Create your feature branch (`git checkout -b feature/my-new-feature`)
-1. Commit your changes (`git commit -am 'Add some feature'`)
-1. Push to the branch (`git push origin feature/my-new-feature`)
-1. Create new Pull Request
+```sh
+$ make build
+```
 
-Even if you can't contribute code, if you have an idea for an improvement 
-please open an [issue](https://github.com/wavesoftware/passless-operator/issues).
+Project will check, test and build binaries. You'll get an executable 
+operator controller `build/bin` dir.
+
+You could also deploy the operator on Kubernetes cluster with following 
+command. Remember to set environment variable `IMAGE_TAG_BASE` to be used as 
+a base of image used.
+
+```sh
+$ export IMAGE_TAG_BASE=gcr.io/vivid-osmos-110/passless-operator 
+$ make deploy
+```
+
+To remove operator from cluster run:
+
+```sh
+$ make undeploy
+```

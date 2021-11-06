@@ -1,7 +1,7 @@
 package scope
 
 type parameterlessProducer struct {
-		scope Scope
+	scope Scope
 }
 
 func (p *parameterlessProducer) Produce(_ string) Scope {

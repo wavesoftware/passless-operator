@@ -1,9 +1,0 @@
-apiVersion: wavesoftware.pl/v1alpha1
-kind: PassLess
-metadata:
-  name: example-passless
-spec:
-  db-password:
-    version: 1
-    scope: alnum
-    length: 16
