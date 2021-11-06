@@ -16,7 +16,8 @@ need of secure data source like LDAP, or HashiCorp's Vault.
 Deploy operator with:
 
 ```bash
-kubectl apply -f https://github.com/wavesoftware/passless-operator/releases/download/v0.2.0/passless.yaml
+kubectl apply -f \
+  https://github.com/wavesoftware/passless-operator/releases/download/v0.3.0/passless.yaml
 ```
 
 ## Usage
