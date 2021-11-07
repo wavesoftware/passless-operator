@@ -152,7 +152,9 @@ rm -rf $$TMP_DIR ;\
 endef
 
 .PHONY: bundle
-bundle: manifests kustomize ## Generate bundle manifests and metadata, then validate generated files.
+bundle: manifests kustomize yq ## Generate bundle manifests and metadata, then validate generated files.
+	$(YQ) e --inplace '.spec.icon[0].base64data = "'$(shell base64 -w 0 logo.svg)'"' \
+		config/manifests/bases/passless-operator.clusterserviceversion.yaml
 	cat config/manager/kustomization-source.yaml > config/manager/kustomization.yaml
 	operator-sdk generate kustomize manifests -q
 	cd config/manager && $(KUSTOMIZE) edit set image controller=$(IMG)
@@ -208,6 +210,10 @@ envtest: ## Download envtest-setup locally if necessary.
 GOTESTSUM = $(shell pwd)/build/bin/gotestsum
 gotestsum: ## Download gotestsum locally if necessary.
 	$(call go-get-tool,$(GOTESTSUM),gotest.tools/gotestsum@v1.7.0)
+
+YQ = $(shell pwd)/build/bin/yq
+yq: ## Download yq locally if necessary.
+	$(call go-get-tool,$(YQ),github.com/mikefarah/yq/v4@latest)
 
 .PHONY: opm
 OPM = ./build/bin/opm
