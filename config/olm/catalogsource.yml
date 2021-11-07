@@ -1,0 +1,10 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: passless-operator
+  namespace: openshift-marketplace
+spec:
+  displayName: Passless Operator
+  image: quay.io/wavesoftware/passless-operator-catalog
+  publisher: Wave Software
+  sourceType: grpc
