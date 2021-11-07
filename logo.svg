@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="logo.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="0.75097656"
+     inkscape:cx="58.590377"
+     inkscape:cy="260.3277"
+     inkscape:window-width="1854"
+     inkscape:window-height="1011"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <rect
+       x="85.841352"
+       y="194.73862"
+       width="149.53706"
+       height="48.954487"
+       id="rect5423" />
+  </defs>
+  <g
+     inkscape:label="Warstwa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       aria-label="*****_"
+       transform="matrix(2.2614591,0,0,2.2614591,-101.33211,-243.41001)"
+       id="text5421"
+       style="font-size:40px;line-height:1.25;font-family:'FuraCode Nerd Font';-inkscape-font-specification:'FuraCode Nerd Font';letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect5423);fill:#2e2e2e;fill-opacity:1">
+      <path
+         d="m 96.161797,207.78495 0.24,8.08 -7.6,-2.72 -1.04,3.16 7.76,2.32 -4.92,6.4 2.68,1.96 4.56,-6.72 4.560003,6.72 2.68,-1.96 -4.92,-6.4 7.76,-2.32 -1.04,-3.16 -7.600003,2.72 0.24,-8.08 z"
+         id="path47255"
+         style="fill:#2e2e2e;fill-opacity:1" />
+      <path
+         d="m 120.16174,207.78495 0.24,8.08 -7.6,-2.72 -1.04,3.16 7.76,2.32 -4.92,6.4 2.68,1.96 4.56,-6.72 4.56,6.72 2.68,-1.96 -4.92,-6.4 7.76,-2.32 -1.04,-3.16 -7.6,2.72 0.24,-8.08 z"
+         id="path47257"
+         style="fill:#2e2e2e;fill-opacity:1" />
+      <path
+         d="m 144.16167,207.78495 0.24,8.08 -7.6,-2.72 -1.04,3.16 7.76,2.32 -4.92,6.4 2.68,1.96 4.56,-6.72 4.56,6.72 2.68,-1.96 -4.92,-6.4 7.76,-2.32 -1.04,-3.16 -7.6,2.72 0.24,-8.08 z"
+         id="path47259"
+         style="fill:#2e2e2e;fill-opacity:1" />
+      <path
+         d="m 168.16161,207.78495 0.24,8.08 -7.6,-2.72 -1.04,3.16 7.76,2.32 -4.92,6.4 2.68,1.96 4.56,-6.72 4.56,6.72 2.68,-1.96 -4.92,-6.4 7.76,-2.32 -1.04,-3.16 -7.6,2.72 0.24,-8.08 z"
+         id="path47261"
+         style="fill:#2e2e2e;fill-opacity:1" />
+      <path
+         d="m 192.16155,207.78495 0.24,8.08 -7.6,-2.72 -1.04,3.16 7.76,2.32 -4.92,6.4 2.68,1.96 4.56,-6.72 4.56,6.72 2.68,-1.96 -4.92,-6.4 7.76,-2.32 -1.04,-3.16 -7.6,2.72 0.24,-8.08 z"
+         id="path47263"
+         style="fill:#2e2e2e;fill-opacity:1" />
+      <path
+         d="m 207.84149,238.18495 v -2.96 h 20 v 2.96 z"
+         id="path47265"
+         style="fill:#2e2e2e;fill-opacity:1" />
+    </g>
+    <rect
+       style="fill:none;stroke:#2e2e2e;stroke-width:8.59945;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect41187"
+       width="357.93631"
+       height="100.65152"
+       x="77.031845"
+       y="205.67424"
+       ry="12.178019" />
+    <path
+       id="path44781"
+       style="color:#000000;fill:#cd3b3b;stroke-linejoin:round;-inkscape-stroke:none;stroke:none;fill-opacity:1"
+       d="M 256 1.3007812 C 115.6892 1.3007831 1.3007832 115.6892 1.3007812 256 C 1.3007813 396.3108 115.6892 510.69922 256 510.69922 C 396.31081 510.69922 510.69922 396.31081 510.69922 256 C 510.69922 115.6892 396.3108 1.3007812 256 1.3007812 z M 256 61.300781 C 305.85624 61.300781 351.18822 79.868989 385.55664 110.46094 L 86.283203 351.67188 C 70.394829 323.44409 61.300781 290.83403 61.300781 256 C 61.300783 148.11557 148.11557 61.300783 256 61.300781 z M 423.6875 156.79102 C 440.8371 185.81402 450.69922 219.70351 450.69922 256 C 450.69922 363.88443 363.88443 450.69922 256 450.69922 C 204.67044 450.69922 158.13733 431.0184 123.42773 398.79492 L 423.6875 156.79102 z " />
+  </g>
+</svg>
