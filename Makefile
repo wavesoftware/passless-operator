@@ -4,8 +4,6 @@
 # - use the VERSION as arg of the bundle target (e.g make bundle VERSION=0.0.2)
 # - use environment variables to overwrite this value (e.g export VERSION=0.0.2)
 VERSION ?= $(shell git describe --tags --always --dirty)
-# TODO: Remove after https://github.com/operator-framework/operator-sdk/issues/5342 is fixed
-SEMVER = $(VERSION:v%=%)
 
 # CHANNELS define the bundle channels used in the bundle.
 # Add a new line here if you would like to change its default config. (E.g CHANNELS = "candidate,fast,stable")
@@ -156,7 +154,7 @@ bundle: manifests kustomize ## Generate bundle manifests and metadata, then vali
 	cat config/manager/kustomization-source.yaml > config/manager/kustomization.yaml
 	operator-sdk generate kustomize manifests -q
 	cd config/manager && $(KUSTOMIZE) edit set image controller=$(IMG)
-	$(KUSTOMIZE) build config/manifests | operator-sdk generate bundle -q --overwrite --version $(SEMVER) $(BUNDLE_METADATA_OPTS)
+	$(KUSTOMIZE) build config/manifests | operator-sdk generate bundle -q --overwrite --version $(VERSION) $(BUNDLE_METADATA_OPTS)
 	operator-sdk bundle validate ./bundle
 
 .PHONY: bundle-build
